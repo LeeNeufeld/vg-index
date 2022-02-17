@@ -1,5 +1,7 @@
+import { Box, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import GameCard from '../../Components/GameCard/GameCard';
 import { API_KEY } from '../../config/config';
 
 
@@ -12,30 +14,26 @@ const HomePage = () => {
   const [games, setGames] = useState([])
 
   const fetchGames = () => {
-    fetch(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2019-09-01,2019-09-30&platforms=18,1,7`)
+    fetch(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2021-01-01,2021-12-31&ordering=-rating&genres=shooter`)
     .then(resp => resp.json())
     .then(({results}) => setGames(results))
   }
 
+  console.log(games)
+
   return (
     <div>
-      <ul>
+      <Box>
+        <Grid container spacing={2}>
       {
-        games.map(game => (
-          <li key={game.id}>
-            <Link to={{
-                pathname: `/game/${game.name}`,
-                gameProps:{
-                  game: game
-                }
-              }}>
-            <h3>{game.name}</h3>
-            <img src={game.background_image} alt="game"/>
-            </Link>
-          </li>
+        games.map((game, i) => (
+          <Grid item key={i} xs={12} sm={6} md={6} lg={4}>
+            <GameCard key={i} game={game}/>
+          </Grid>
         ))
       }
-      </ul>
+      </Grid>
+      </Box>
     </div>
   )
 }

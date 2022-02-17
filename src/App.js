@@ -9,9 +9,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" render={(props) => <HomePage {...props} />} />
           <Route exact path="/Search" component={Search} />
-          <Route exact path="/game/:name" component={GameDetail} />
+          <Route exact path="/game/:name" render={(props) => <GameDetail {...props} />} />
         </Switch>
       </Router>
     </div>

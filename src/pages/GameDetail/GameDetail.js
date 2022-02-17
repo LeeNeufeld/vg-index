@@ -1,11 +1,14 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-function GameDetail(){
+const GameDetail = (props)=>{
+
+    const {game} = props.location.gameProps
+    console.log(game)
 
     return(
-        <Box>
-            <Typography>Game Detail</Typography>
-        </Box>
+        
+            <h1>{game.name}</h1>
+        
     )
         
     
